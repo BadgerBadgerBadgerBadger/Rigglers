@@ -2,7 +2,8 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
-import static processing.core.PApplet.*;
+import static processing.core.PApplet.cos;
+import static processing.core.PApplet.sin;
 import static processing.core.PConstants.TWO_PI;
 
 class FoodSystem {
@@ -65,8 +66,7 @@ class FoodSystem {
     }
 
     boolean hasFood() {
-        if (fS.size() > 0) return true;
-        else return false;
+        return fS.size() > 0;
     }
 
     void addOneFood() {
@@ -74,7 +74,7 @@ class FoodSystem {
         float rad = parent.random(rangeRadius);
 
         PVector loc = new PVector(rad * cos(deg), rad * sin(deg));
-        loc.add(new PVector(parent.getxBound() / 2, parent.getyBound() / 2));
+        loc.add(new PVector(parent.getXBound() / 2, parent.getYBound() / 2));
 
         if (fS.size() < maxFood) {
             fS.add(new Food(this.parent, loc, foodSize, shade));
@@ -89,36 +89,9 @@ class FoodSystem {
         PVector loc = new PVector(rad * cos(deg), rad * sin(deg));
         loc.add(new PVector(parent.width / 2, parent.height / 2));
 
-        int timeStep = 60 / genRate;
-        int inis = parent.frameCount;
-
         if (fS.size() < maxFood) {
 
             fS.add(new Food(this.parent, loc, foodSize, shade));
         }
-    }
-
-    public ArrayList<Food> getfS() {
-        return fS;
-    }
-
-    public int getMaxFood() {
-        return maxFood;
-    }
-
-    public int getGenRate() {
-        return genRate;
-    }
-
-    public float getRangeRadius() {
-        return rangeRadius;
-    }
-
-    public float getFoodSize() {
-        return foodSize;
-    }
-
-    public int getShade() {
-        return shade;
     }
 }

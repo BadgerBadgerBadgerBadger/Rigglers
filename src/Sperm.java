@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import static processing.core.PApplet.*;
 import static processing.core.PConstants.PI;
 
-class Entity {
+class Sperm {
 
     private PApplet parent;
 
@@ -16,9 +16,7 @@ class Entity {
 
     private float size;
     private int shade;
-    private int strocke;
 
-    private float mass;
     private float restitution;
 
     private float maxSpeed;
@@ -37,16 +35,14 @@ class Entity {
     private int xBound;
     private int yBound;
 
-    Entity(Rigglers parent, PVector location, float size, int shade, int strocke, float mass, float restitution,
-           float maxSpeed, float maxForce, float senseRange, boolean gender, int lifeSpan, int xBound, int yBound) {
+    Sperm(Rigglers parent, PVector location, float size, int shade, int strokeWeight, float mass, float restitution,
+          float maxSpeed, float maxForce, float senseRange, boolean gender, int lifeSpan) {
 
         this.parent = parent;
 
-        this.location = location.get();
+        this.location = location.copy();
         this.size = size;
         this.shade = shade;
-        this.strocke = strocke;
-        this.mass = mass;
         this.restitution = restitution;
         this.maxSpeed = maxSpeed;
         this.maxForce = maxForce;
@@ -61,19 +57,19 @@ class Entity {
         tailSwipe = 0;
         woff = parent.random(100000);
 
-        xBound = parent.getxBound();
-        yBound = parent.getyBound();
+        xBound = parent.getXBound();
+        yBound = parent.getYBound();
     }
 
     private void applyForce(PVector force) {
         acceleration.add(force);
     }
 
-    void flock(ArrayList<Entity> alEnt, float afLimit) {
+    void flock(ArrayList<Sperm> alEnt, float afLimit) {
 
         PVector toFlock = new PVector();
         int avgCount = 0;
-        for (Entity ent : alEnt) {
+        for (Sperm ent : alEnt) {
             if (PVector.dist(ent.location, location) < size * 7) {
                 toFlock.add(ent.location);
                 avgCount++;
@@ -120,7 +116,7 @@ class Entity {
 
     }
 
-    void edgeCheck() {
+    private void edgeCheck() {
 
         if (location.x + size / 2 > xBound) {
             location.x = xBound - size / 2;
@@ -140,10 +136,10 @@ class Entity {
         }
     }
 
-    void separate(ArrayList<Entity> alEnt, float afLimit) {
+    void separate(ArrayList<Sperm> alEnt, float afLimit) {
         int count = 0;
         PVector away = new PVector();
-        for (Entity ent : alEnt) {
+        for (Sperm ent : alEnt) {
             if (PVector.dist(location, ent.location) > 0 && PVector.dist(location, ent.location) < size * 4.1) {
                 PVector awayForce = PVector.sub(location, ent.location);
                 awayForce.normalize();
@@ -235,7 +231,7 @@ class Entity {
 
     }
 
-    void tail(PVector location, float len, float deg, int forStroke) {
+    private void tail(PVector location, float len, float deg, int forStroke) {
 
         float vMag = velocity.mag();
 
@@ -262,131 +258,11 @@ class Entity {
         parent.popMatrix();
     }
 
-    public PVector getLocation() {
+    PVector getLocation() {
         return location;
     }
 
-    public void setLocation(PVector location) {
-        this.location = location;
-    }
-
-    public PVector getVelocity() {
-        return velocity;
-    }
-
-    public void setVelocity(PVector velocity) {
-        this.velocity = velocity;
-    }
-
-    public PVector getAcceleration() {
-        return acceleration;
-    }
-
-    public void setAcceleration(PVector acceleration) {
-        this.acceleration = acceleration;
-    }
-
-    public float getSize() {
+    float getSize() {
         return size;
-    }
-
-    public void setSize(float size) {
-        this.size = size;
-    }
-
-    public int getShade() {
-        return shade;
-    }
-
-    public void setShade(int shade) {
-        this.shade = shade;
-    }
-
-    public int getStrocke() {
-        return strocke;
-    }
-
-    public void setStrocke(int strocke) {
-        this.strocke = strocke;
-    }
-
-    public float getMass() {
-        return mass;
-    }
-
-    public void setMass(float mass) {
-        this.mass = mass;
-    }
-
-    public float getRestitution() {
-        return restitution;
-    }
-
-    public void setRestitution(float restitution) {
-        this.restitution = restitution;
-    }
-
-    public float getMaxSpeed() {
-        return maxSpeed;
-    }
-
-    public void setMaxSpeed(float maxSpeed) {
-        this.maxSpeed = maxSpeed;
-    }
-
-    public float getMaxForce() {
-        return maxForce;
-    }
-
-    public void setMaxForce(float maxForce) {
-        this.maxForce = maxForce;
-    }
-
-    public float getSenseRange() {
-        return senseRange;
-    }
-
-    public void setSenseRange(float senseRange) {
-        this.senseRange = senseRange;
-    }
-
-    public boolean isGender() {
-        return gender;
-    }
-
-    public void setGender(boolean gender) {
-        this.gender = gender;
-    }
-
-    public float getTailSwipe() {
-        return tailSwipe;
-    }
-
-    public void setTailSwipe(float tailSwipe) {
-        this.tailSwipe = tailSwipe;
-    }
-
-    public float getWoff() {
-        return woff;
-    }
-
-    public void setWoff(float woff) {
-        this.woff = woff;
-    }
-
-    public int getFullLife() {
-        return fullLife;
-    }
-
-    public void setFullLife(int fullLife) {
-        this.fullLife = fullLife;
-    }
-
-    public int getLifeSpan() {
-        return lifeSpan;
-    }
-
-    public void setLifeSpan(int lifeSpan) {
-        this.lifeSpan = lifeSpan;
     }
 }

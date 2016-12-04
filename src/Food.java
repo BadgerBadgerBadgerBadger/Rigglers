@@ -21,6 +21,7 @@ class Food {
     }
 
     void display() {
+
         parent.pushMatrix();
         parent.translate(foodLocation.x, foodLocation.y);
         parent.rectMode(CENTER);
