@@ -1,3 +1,5 @@
+package io.github.scionofbytes.Rigglers;
+
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -35,7 +37,7 @@ class Sperm {
     private int xBound;
     private int yBound;
 
-    Sperm(Rigglers parent, PVector location, float size, int shade, int strokeWeight, float mass, float restitution,
+    Sperm(Main parent, PVector location, float size, int shade, int strokeWeight, float mass, float restitution,
           float maxSpeed, float maxForce, float senseRange, boolean gender, int lifeSpan) {
 
         this.parent = parent;

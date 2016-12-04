@@ -1,3 +1,5 @@
+package io.github.scionofbytes.Rigglers;
+
 import processing.core.PVector;
 
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ import static processing.core.PConstants.TWO_PI;
 
 class FoodSystem {
 
-    private Rigglers parent;
+    private Main parent;
 
     private ArrayList<Food> fS;
 
@@ -19,7 +21,7 @@ class FoodSystem {
     private float foodSize;
     private int shade;
 
-    FoodSystem(Rigglers parent, int maxFood, int genRate, float rangeRadius, float foodSize, int shade, int xBound,
+    FoodSystem(Main parent, int maxFood, int genRate, float rangeRadius, float foodSize, int shade, int xBound,
                int yBound) {
 
         this.parent = parent;

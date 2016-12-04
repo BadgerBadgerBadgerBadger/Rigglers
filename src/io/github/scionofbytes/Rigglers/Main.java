@@ -1,3 +1,5 @@
+package io.github.scionofbytes.Rigglers;
+
 import g4p_controls.*;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -5,7 +7,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Rigglers extends PApplet {
+public class Main extends PApplet {
 
     private ArrayList<Sperm> sperms;
     private FoodSystem foodSystem;
@@ -188,7 +190,7 @@ public class Rigglers extends PApplet {
             if (ent.isHungry()) nOH++;
             if (ent.isAboutToDie()) nOAtD++;
         }
-        String sT = "Rigglers: " + Integer.toString(nOR) + ", Hungry: " + Integer.toString(nOH) + ", About to Die: " + Integer.toString(nOAtD) + ", Food: " + Integer.toString(foodSystem.size());
+        String sT = "Main: " + Integer.toString(nOR) + ", Hungry: " + Integer.toString(nOH) + ", About to Die: " + Integer.toString(nOAtD) + ", Food: " + Integer.toString(foodSystem.size());
         stroke(255);
         numberOfRigglers.setText(sT);
     }
@@ -237,7 +239,7 @@ public class Rigglers extends PApplet {
     }
 
     public static void main(String[] args) {
-        PApplet.main("Rigglers");
+        PApplet.main("io.github.scionofbytes.Rigglers.Main");
     }
 
     public void riggleButtonClicked(GButton source, GEvent event) {
@@ -245,7 +247,7 @@ public class Rigglers extends PApplet {
         String inpT = riggleAmount.getText();
         inpT.trim();
 
-        if (Rigglers.isNumeric(inpT)) {
+        if (Main.isNumeric(inpT)) {
 
             this.birthSpeed = maxSpeedSliderSns.getValueF();
             this.speedTypeSpeed = maxSpeedSliderSpd.getValueF();
@@ -271,7 +273,7 @@ public class Rigglers extends PApplet {
         String inpT = foodField.getText();
         inpT.trim();
 
-        if (Rigglers.isNumeric(inpT)) {
+        if (Main.isNumeric(inpT)) {
 
             this.addMeFood(Integer.parseInt(inpT));
             foodField.setText("");
@@ -349,8 +351,8 @@ public class Rigglers extends PApplet {
         G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
         G4P.setCursor(ARROW);
 
-        if (this.frame != null) {
-            this.frame.setTitle("Sketch Window");
+        if (this.surface != null) {
+            this.surface.setTitle("Sketch Window");
         }
 
         numberOfRigglers = new GLabel(this, 1, 1, 155, 32);
